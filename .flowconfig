@@ -1,0 +1,14 @@
+[ignore]
+<PROJECT_ROOT>/docs/.*
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+module.name_mapper='nsn.platform.api\/\(.*\)$' -> '<PROJECT_ROOT>/dist/node/\1'
+
+[strict]

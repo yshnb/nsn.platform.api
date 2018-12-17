@@ -1,0 +1,7 @@
+flow-typed/npm
+node_modules
+
+dist/*
+docs/*
+
+!.gitkeep
