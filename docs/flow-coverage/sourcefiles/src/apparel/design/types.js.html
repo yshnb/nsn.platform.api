@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><link rel="stylesheet" href="../../../../assets/semantic.min.css"/><link rel="stylesheet" href="../../../../assets/codemirror.css"/><link rel="stylesheet" href="../../../../assets/flow-highlight-source.css"/><link rel="stylesheet" href="../../../../assets/flow-coverage-report.css"/><link rel="stylesheet" href="../../../../assets/codemirror-simplescrollbars-addon.css"/><script src="../../../../assets/jquery-3.1.0.min.js"></script><script src="../../../../assets/semantic.min.js"></script><script src="../../../../assets/semantic-tablesort.js"></script><script src="../../../../assets/codemirror.js"></script><script src="../../../../assets/codemirror-javascript-mode.js"></script><script src="../../../../assets/codemirror-annotatescrollbar-addon.js"></script><script src="../../../../assets/codemirror-simplescrollbars-addon.js"></script><script src="../../../../assets/flow-highlight-source.js"></script><script src="../../../../assets/index.js"></script><style>
+.ui .CodeMirror {
+  border: 1px solid rgba(34,36,38,.15);
+  height: auto;
+}
+</style></head><body><div class="ui grid container"><div class="row"><div class="twelve wide column"><h2 class="ui header"><a href="../../../../index.html" id="link-to-summary">Flow Coverage Report</a></h2></div></div><div class="row"><table class="ui small celled unstackable table"><thead><tr><th class="sorted ascending">Filename</th><th>Annotation</th><th>Percent</th><th>Total</th><th>Covered</th><th>Uncovered</th></tr></thead><tbody><tr class="negative"><td class="">src/apparel/design/types.js</td><td> @no flow </td><td class=""><span>100 %</span></td><td> 25 </td><td> 25 </td><td> 0 </td></tr></tbody></table></div><div class="row ui one column centered grid"><div class="column" style="text-align:left;"><div class="row"><div class="ui form"><div class="fields"><div class="sixteen wide inline field"><select class="ui search dropdown uncovered-locations"><option value="">Uncovered Locations</option></select></div><div class="four wide inline field"><select class="ui search dropdown syntax-highlighting"><option value="es">ES6/ES7</option><option value="js">JavaScript</option><option value="no">None</option></select></div></div></div></div><textarea readonly="" id="file-content">
+
+import {
+  type SizeKey,
+  type SizeFamilyKey,
+} from &#x27;../core/types&#x27;
+
+/**
+ */
+export type ID = string
+
+export type Key = string
+
+export type {
+  SizeKey,
+  SizeFamilyKey,
+}
+
+/**
+ */
+export type Name = string
+
+export type DesignerID = string
+
+export type ProviderID = string
+
+export type BrandKey = string
+
+export type Cost = number
+
+export type Price = number
+
+export type GenderTarget = &quot;male&quot; | &quot;female&quot;
+
+export type CategoryKey = string
+
+export type Comment = string
+
+export type Measurement = {
+  name: string,
+  values: Object,
+}
+
+export type Quantity = number
+
+/**
+ */
+export type EntryState = &quot;active&quot; | &quot;deleted&quot;
+
+
+// -------------------------------------------------
+// MODELS
+/**
+ */
+export type Design = {
+  id:   ID,
+  name: Name,
+}
+
+/**
+ */
+export type BaseSnapshot = Design
+
+/**
+ */
+export type Snapshot = BaseSnapshot &amp; {
+  key: string,
+  version: number, // 2,
+  brand: string, // lazlena,
+  designer: number, // 529568bf-6566-43dc-b23b-33e8b77f491d,
+  state: string,
+  provider: string,
+  genderTarget: string,
+  cost: number, // 100.0,
+  price: number, // 200.0,
+  sizeFamily: SizeFamily, // sml,
+  patterns: Array&lt;ColorPattern&gt;,
+  measurements: Array&lt;Measurement&gt;,
+  attachments: Array&lt;Attachment&gt;,
+  comment?: string,
+  images: Array&lt;Image&gt;,
+  category: CategoryKey,
+  registeredAt: string, // 2018-05-28T12:26:14Z,
+  snapshotAt: string, // 2018-05-28T12:26:14Z
+}
+
+/**
+ */
+export type SnapshotIndex = BaseSnapshot &amp; {}
+
+/**
+ */
+export type BaseEntry = Design 
+
+/**
+ */
+export type EntryIndex = BaseEntry &amp; {}
+
+/**
+ */
+export type Entry = BaseEntry &amp; {
+  id: ID,
+  brand: BrandKey,
+  designer?: DesignerID,
+  provider?: ProviderID,
+  name?: Name,
+  cost?: Cost,
+  price?: Price,
+  genderTarget?: GenderTarget,
+  category?: CategoryKey,
+  patterns?: Array&lt;ColorPattern&gt;,
+  sizeFamily?: SizeFamilyKey,
+  sizes?: Array&lt;SizeKey&gt;,
+  comment?: Comment,
+  measurements?: Array&lt;Measurement&gt;,
+  attachments?: Array&lt;Attachment&gt;,
+  images?: Array&lt;Image&gt;,
+}
+
+export type ColorPattern = {
+  colorLabel:   string,
+  colorFamilies: Array&lt;string&gt;,
+  texture:      string,
+  pattern:      string,
+  materials:    Array&lt;MaterialRatio&gt;
+}
+
+export type MaterialRatio = {
+  key:   MaterialName,
+  ratio: MaterialRatio,
+}
+
+/**
+ */
+export type Attachment = {
+  key: string,
+  title: string,
+  uploadedAt: string,
+}
+
+export type Image = {
+  key: string,
+  title: string,
+  uploadedAt: string,
+};
+</textarea></div></div><div class="row centered"><footer>Flow Coverage Report generated by<a href="https://flowtype.org"> flow </a>and<a href="https://github.com/rpl/flow-coverage-report"> flow-coverage-report </a>at Sun Mar 03 2019 00:16:13 GMT+0900 (JST)</footer></div></div><pre id="file-coverage-data" style="display:none;">{&quot;expressions&quot;:{&quot;covered_count&quot;:25,&quot;covered_locs&quot;:[{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:9,&quot;column&quot;:8,&quot;offset&quot;:87},&quot;end&quot;:{&quot;line&quot;:9,&quot;column&quot;:23,&quot;offset&quot;:103}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:11,&quot;column&quot;:8,&quot;offset&quot;:112},&quot;end&quot;:{&quot;line&quot;:11,&quot;column&quot;:24,&quot;offset&quot;:129}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:20,&quot;column&quot;:8,&quot;offset&quot;:191},&quot;end&quot;:{&quot;line&quot;:20,&quot;column&quot;:25,&quot;offset&quot;:209}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:22,&quot;column&quot;:8,&quot;offset&quot;:218},&quot;end&quot;:{&quot;line&quot;:22,&quot;column&quot;:31,&quot;offset&quot;:242}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:24,&quot;column&quot;:8,&quot;offset&quot;:251},&quot;end&quot;:{&quot;line&quot;:24,&quot;column&quot;:31,&quot;offset&quot;:275}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:26,&quot;column&quot;:8,&quot;offset&quot;:284},&quot;end&quot;:{&quot;line&quot;:26,&quot;column&quot;:29,&quot;offset&quot;:306}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:28,&quot;column&quot;:8,&quot;offset&quot;:315},&quot;end&quot;:{&quot;line&quot;:28,&quot;column&quot;:25,&quot;offset&quot;:333}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:30,&quot;column&quot;:8,&quot;offset&quot;:342},&quot;end&quot;:{&quot;line&quot;:30,&quot;column&quot;:26,&quot;offset&quot;:361}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:32,&quot;column&quot;:8,&quot;offset&quot;:370},&quot;end&quot;:{&quot;line&quot;:32,&quot;column&quot;:44,&quot;offset&quot;:407}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:34,&quot;column&quot;:8,&quot;offset&quot;:416},&quot;end&quot;:{&quot;line&quot;:34,&quot;column&quot;:32,&quot;offset&quot;:441}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:36,&quot;column&quot;:8,&quot;offset&quot;:450},&quot;end&quot;:{&quot;line&quot;:36,&quot;column&quot;:28,&quot;offset&quot;:471}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:38,&quot;column&quot;:8,&quot;offset&quot;:480},&quot;end&quot;:{&quot;line&quot;:41,&quot;column&quot;:1,&quot;offset&quot;:536}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:43,&quot;column&quot;:8,&quot;offset&quot;:545},&quot;end&quot;:{&quot;line&quot;:43,&quot;column&quot;:29,&quot;offset&quot;:567}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:47,&quot;column&quot;:8,&quot;offset&quot;:584},&quot;end&quot;:{&quot;line&quot;:47,&quot;column&quot;:45,&quot;offset&quot;:622}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:54,&quot;column&quot;:8,&quot;offset&quot;:703},&quot;end&quot;:{&quot;line&quot;:57,&quot;column&quot;:1,&quot;offset&quot;:746}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:61,&quot;column&quot;:8,&quot;offset&quot;:763},&quot;end&quot;:{&quot;line&quot;:61,&quot;column&quot;:33,&quot;offset&quot;:789}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:65,&quot;column&quot;:8,&quot;offset&quot;:806},&quot;end&quot;:{&quot;line&quot;:84,&quot;column&quot;:1,&quot;offset&quot;:1385}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:88,&quot;column&quot;:8,&quot;offset&quot;:1402},&quot;end&quot;:{&quot;line&quot;:88,&quot;column&quot;:45,&quot;offset&quot;:1440}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:92,&quot;column&quot;:8,&quot;offset&quot;:1457},&quot;end&quot;:{&quot;line&quot;:92,&quot;column&quot;:30,&quot;offset&quot;:1480}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:96,&quot;column&quot;:8,&quot;offset&quot;:1498},&quot;end&quot;:{&quot;line&quot;:96,&quot;column&quot;:39,&quot;offset&quot;:1530}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:100,&quot;column&quot;:8,&quot;offset&quot;:1547},&quot;end&quot;:{&quot;line&quot;:117,&quot;column&quot;:1,&quot;offset&quot;:1966}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:119,&quot;column&quot;:8,&quot;offset&quot;:1975},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:1,&quot;offset&quot;:2139}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:127,&quot;column&quot;:8,&quot;offset&quot;:2148},&quot;end&quot;:{&quot;line&quot;:130,&quot;column&quot;:1,&quot;offset&quot;:2219}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:134,&quot;column&quot;:8,&quot;offset&quot;:2236},&quot;end&quot;:{&quot;line&quot;:138,&quot;column&quot;:1,&quot;offset&quot;:2311}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/types.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:140,&quot;column&quot;:8,&quot;offset&quot;:2320},&quot;end&quot;:{&quot;line&quot;:144,&quot;column&quot;:2,&quot;offset&quot;:2391}}],&quot;uncovered_count&quot;:0,&quot;uncovered_locs&quot;:[],&quot;empty_count&quot;:0,&quot;empty_locs&quot;:[]},&quot;filename&quot;:&quot;src/apparel/design/types.js&quot;,&quot;annotation&quot;:&quot;no flow&quot;,&quot;isFlow&quot;:false,&quot;percent&quot;:100}</pre></body></html>

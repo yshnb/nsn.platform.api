@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><link rel="stylesheet" href="../../../../assets/semantic.min.css"/><link rel="stylesheet" href="../../../../assets/codemirror.css"/><link rel="stylesheet" href="../../../../assets/flow-highlight-source.css"/><link rel="stylesheet" href="../../../../assets/flow-coverage-report.css"/><link rel="stylesheet" href="../../../../assets/codemirror-simplescrollbars-addon.css"/><script src="../../../../assets/jquery-3.1.0.min.js"></script><script src="../../../../assets/semantic.min.js"></script><script src="../../../../assets/semantic-tablesort.js"></script><script src="../../../../assets/codemirror.js"></script><script src="../../../../assets/codemirror-javascript-mode.js"></script><script src="../../../../assets/codemirror-annotatescrollbar-addon.js"></script><script src="../../../../assets/codemirror-simplescrollbars-addon.js"></script><script src="../../../../assets/flow-highlight-source.js"></script><script src="../../../../assets/index.js"></script><style>
+.ui .CodeMirror {
+  border: 1px solid rgba(34,36,38,.15);
+  height: auto;
+}
+</style></head><body><div class="ui grid container"><div class="row"><div class="twelve wide column"><h2 class="ui header"><a href="../../../../index.html" id="link-to-summary">Flow Coverage Report</a></h2></div></div><div class="row"><table class="ui small celled unstackable table"><thead><tr><th class="sorted ascending">Filename</th><th>Annotation</th><th>Percent</th><th>Total</th><th>Covered</th><th>Uncovered</th></tr></thead><tbody><tr class="negative"><td class="">src/apparel/design/index.js</td><td> @flow strict </td><td class=""><span>81 %</span></td><td> 71 </td><td> 58 </td><td> 13 </td></tr></tbody></table></div><div class="row ui one column centered grid"><div class="column" style="text-align:left;"><div class="row"><div class="ui form"><div class="fields"><div class="sixteen wide inline field"><select class="ui search dropdown uncovered-locations"><option value="">Uncovered Locations</option><option value="92">Start: 92,15 - End: 96,7</option><option value="103">Start: 103,12 - End: 103,17</option><option value="104">Start: 104,52 - End: 104,53</option><option value="117">Start: 117,10 - End: 117,15</option><option value="118">Start: 118,53 - End: 118,54</option><option value="124">Start: 124,11 - End: 124,16</option><option value="125">Start: 125,53 - End: 125,54</option><option value="131">Start: 131,13 - End: 131,18</option><option value="132">Start: 132,53 - End: 132,54</option><option value="138">Start: 138,9 - End: 138,14</option><option value="139">Start: 139,53 - End: 139,54</option><option value="145">Start: 145,14 - End: 145,19</option><option value="146">Start: 146,53 - End: 146,54</option></select></div><div class="four wide inline field"><select class="ui search dropdown syntax-highlighting"><option value="es">ES6/ES7</option><option value="js">JavaScript</option><option value="no">None</option></select></div></div></div></div><textarea readonly="" id="file-content">/* @flow strict */
+/**
+ */
+import {
+  BaseClient,
+  type Response,
+  type ListView,
+} from &#x27;../../core&#x27;
+
+
+import {
+  type SizeKey,
+  type SizeFamilyKey,
+} from &#x27;../core/types&#x27;
+
+import type {
+  Attachment,
+  BrandKey,
+  CategoryKey,
+  ColorPattern,
+  Cost,
+  DesignerID,
+  EntryState,
+  GenderTarget,
+  ID,
+  Image,
+  Key,
+  Measurement,
+  Name,
+  Price,
+  ProviderID,
+  Quantity,
+  // Models
+  Entry,
+  EntryIndex,
+  Snapshot,
+} from &#x27;./types&#x27;
+
+/**
+ */
+export type ListOption = {
+  condition?: {
+    key?: Key,
+    state?: EntryState,
+    designer?: DesignerID,
+  }
+}
+
+/**
+ */
+export type OrderParams = {
+  quantity: Quantity,
+}
+
+export type RegisterParams = {
+  brand: BrandKey,
+  designer?: DesignerID,
+  provider?: ProviderID,
+  name?: Name,
+  cost?: Cost,
+  price?: Price,
+  genderTarget?: GenderTarget,
+  category?: CategoryKey,
+  patterns?: Array&lt;ColorPattern&gt;,
+  sizeFamily?: SizeFamilyKey,
+  sizes?: Array&lt;SizeKey&gt;,
+  comment?: Comment,
+  measurements?: Array&lt;Measurement&gt;,
+  attachments?: Array&lt;Attachment&gt;,
+  images?: Array&lt;Image&gt;,
+}
+
+/**
+ */
+export type UpdateParams = {
+  key: ?string,
+}
+
+/**
+ *
+ */
+export class Client extends BaseClient {
+
+  /**
+   *
+   */
+  list(size: number = 10, offset: number = 0, opt: ListOption = {}): Response&lt;ListView&lt;EntryIndex&gt;&gt; {
+    const condition = {
+      ...opt.condition,
+    }
+    return this.httpClient.get(&#x27;/apparel/designs&#x27;, {
+      params: {
+        size,
+        offset,
+        ...condition,
+      }
+    })
+  }
+
+  /**
+   *
+   */
+  describe(id: ID): Response&lt;Snapshot&gt; {
+    return this.httpClient.get(`/apparel/designs/${id}`)
+  }
+
+  /**
+   *
+   */
+  register(entry: RegisterParams): Response&lt;Entry&gt; {
+    return this.httpClient.post(&#x27;/apparel/designs&#x27;, entry)
+  }
+
+  /**
+   *
+   */
+  update(id: ID, params: UpdateParams): Response&lt;Entry&gt; {
+    return this.httpClient.post(`/apparel/designs/${id}`, params)
+  }
+
+  /**
+   *
+   */
+  archive(id: ID): Response&lt;void&gt; {
+    return this.httpClient.post(`/apparel/designs/${id}/archive`)
+  }
+
+  /**
+   *
+   */
+  unarchive(id: ID): Response&lt;void&gt; {
+    return this.httpClient.post(`/apparel/designs/${id}/unarchive`)
+  }
+
+  /**
+   * Order sample
+   */
+  order(id: ID, params: OrderParams): Response&lt;void&gt; {
+    return this.httpClient.post(`/apparel/designs/${id}/order`, params)
+  }
+
+  /**
+   *
+   */
+  productize(id: ID): Response&lt;void&gt; {
+    return this.httpClient.post(`/apparel/designs/${id}/productize`)
+  }
+}
+</textarea></div></div><div class="row centered"><footer>Flow Coverage Report generated by<a href="https://flowtype.org"> flow </a>and<a href="https://github.com/rpl/flow-coverage-report"> flow-coverage-report </a>at Sun Mar 03 2019 00:16:13 GMT+0900 (JST)</footer></div></div><pre id="file-coverage-data" style="display:none;">{&quot;expressions&quot;:{&quot;covered_count&quot;:58,&quot;covered_locs&quot;:[{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:41,&quot;column&quot;:8,&quot;offset&quot;:460},&quot;end&quot;:{&quot;line&quot;:47,&quot;column&quot;:1,&quot;offset&quot;:567}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:51,&quot;column&quot;:8,&quot;offset&quot;:584},&quot;end&quot;:{&quot;line&quot;:53,&quot;column&quot;:1,&quot;offset&quot;:628}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:55,&quot;column&quot;:8,&quot;offset&quot;:637},&quot;end&quot;:{&quot;line&quot;:71,&quot;column&quot;:1,&quot;offset&quot;:1043}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:75,&quot;column&quot;:8,&quot;offset&quot;:1060},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:1,&quot;offset&quot;:1099}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:82,&quot;column&quot;:8,&quot;offset&quot;:1119},&quot;end&quot;:{&quot;line&quot;:148,&quot;column&quot;:1,&quot;offset&quot;:2412}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:82,&quot;column&quot;:29,&quot;offset&quot;:1140},&quot;end&quot;:{&quot;line&quot;:82,&quot;column&quot;:38,&quot;offset&quot;:1150}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:8,&quot;offset&quot;:1178},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:19,&quot;offset&quot;:1190}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:23,&quot;offset&quot;:1193},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:24,&quot;offset&quot;:1195}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:27,&quot;offset&quot;:1197},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:40,&quot;offset&quot;:1211}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:44,&quot;offset&quot;:1214},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:44,&quot;offset&quot;:1215}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:47,&quot;offset&quot;:1217},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:61,&quot;offset&quot;:1232}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:65,&quot;offset&quot;:1235},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:66,&quot;offset&quot;:1237}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:88,&quot;column&quot;:11,&quot;offset&quot;:1283},&quot;end&quot;:{&quot;line&quot;:88,&quot;column&quot;:19,&quot;offset&quot;:1292}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:88,&quot;column&quot;:23,&quot;offset&quot;:1295},&quot;end&quot;:{&quot;line&quot;:90,&quot;column&quot;:5,&quot;offset&quot;:1326}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:89,&quot;column&quot;:10,&quot;offset&quot;:1306},&quot;end&quot;:{&quot;line&quot;:89,&quot;column&quot;:12,&quot;offset&quot;:1309}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:89,&quot;column&quot;:10,&quot;offset&quot;:1306},&quot;end&quot;:{&quot;line&quot;:89,&quot;column&quot;:22,&quot;offset&quot;:1319}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:12,&quot;offset&quot;:1338},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:15,&quot;offset&quot;:1342}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:12,&quot;offset&quot;:1338},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:26,&quot;offset&quot;:1353}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:12,&quot;offset&quot;:1338},&quot;end&quot;:{&quot;line&quot;:97,&quot;column&quot;:6,&quot;offset&quot;:1462}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:32,&quot;offset&quot;:1358},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:49,&quot;offset&quot;:1376}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:52,&quot;offset&quot;:1378},&quot;end&quot;:{&quot;line&quot;:97,&quot;column&quot;:5,&quot;offset&quot;:1461}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:93,&quot;column&quot;:9,&quot;offset&quot;:1404},&quot;end&quot;:{&quot;line&quot;:93,&quot;column&quot;:12,&quot;offset&quot;:1408}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:94,&quot;column&quot;:9,&quot;offset&quot;:1418},&quot;end&quot;:{&quot;line&quot;:94,&quot;column&quot;:14,&quot;offset&quot;:1424}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:95,&quot;column&quot;:12,&quot;offset&quot;:1437},&quot;end&quot;:{&quot;line&quot;:95,&quot;column&quot;:20,&quot;offset&quot;:1446}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:104,&quot;column&quot;:12,&quot;offset&quot;:1537},&quot;end&quot;:{&quot;line&quot;:104,&quot;column&quot;:15,&quot;offset&quot;:1541}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:104,&quot;column&quot;:12,&quot;offset&quot;:1537},&quot;end&quot;:{&quot;line&quot;:104,&quot;column&quot;:26,&quot;offset&quot;:1552}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:104,&quot;column&quot;:12,&quot;offset&quot;:1537},&quot;end&quot;:{&quot;line&quot;:104,&quot;column&quot;:56,&quot;offset&quot;:1582}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:104,&quot;column&quot;:32,&quot;offset&quot;:1557},&quot;end&quot;:{&quot;line&quot;:104,&quot;column&quot;:55,&quot;offset&quot;:1581}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:110,&quot;column&quot;:12,&quot;offset&quot;:1616},&quot;end&quot;:{&quot;line&quot;:110,&quot;column&quot;:32,&quot;offset&quot;:1637}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:111,&quot;column&quot;:12,&quot;offset&quot;:1669},&quot;end&quot;:{&quot;line&quot;:111,&quot;column&quot;:15,&quot;offset&quot;:1673}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:111,&quot;column&quot;:12,&quot;offset&quot;:1669},&quot;end&quot;:{&quot;line&quot;:111,&quot;column&quot;:26,&quot;offset&quot;:1684}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:111,&quot;column&quot;:12,&quot;offset&quot;:1669},&quot;end&quot;:{&quot;line&quot;:111,&quot;column&quot;:58,&quot;offset&quot;:1716}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:111,&quot;column&quot;:33,&quot;offset&quot;:1690},&quot;end&quot;:{&quot;line&quot;:111,&quot;column&quot;:50,&quot;offset&quot;:1708}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:111,&quot;column&quot;:53,&quot;offset&quot;:1710},&quot;end&quot;:{&quot;line&quot;:111,&quot;column&quot;:57,&quot;offset&quot;:1715}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:117,&quot;column&quot;:18,&quot;offset&quot;:1756},&quot;end&quot;:{&quot;line&quot;:117,&quot;column&quot;:37,&quot;offset&quot;:1776}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:12,&quot;offset&quot;:1808},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:15,&quot;offset&quot;:1812}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:12,&quot;offset&quot;:1808},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:26,&quot;offset&quot;:1823}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:12,&quot;offset&quot;:1808},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:65,&quot;offset&quot;:1862}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:33,&quot;offset&quot;:1829},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:56,&quot;offset&quot;:1853}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:59,&quot;offset&quot;:1855},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:64,&quot;offset&quot;:1861}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12,&quot;offset&quot;:1932},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:15,&quot;offset&quot;:1936}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12,&quot;offset&quot;:1932},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:26,&quot;offset&quot;:1947}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12,&quot;offset&quot;:1932},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:65,&quot;offset&quot;:1986}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:33,&quot;offset&quot;:1953},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:64,&quot;offset&quot;:1985}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:132,&quot;column&quot;:12,&quot;offset&quot;:2058},&quot;end&quot;:{&quot;line&quot;:132,&quot;column&quot;:15,&quot;offset&quot;:2062}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:132,&quot;column&quot;:12,&quot;offset&quot;:2058},&quot;end&quot;:{&quot;line&quot;:132,&quot;column&quot;:26,&quot;offset&quot;:2073}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:132,&quot;column&quot;:12,&quot;offset&quot;:2058},&quot;end&quot;:{&quot;line&quot;:132,&quot;column&quot;:67,&quot;offset&quot;:2114}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:132,&quot;column&quot;:33,&quot;offset&quot;:2079},&quot;end&quot;:{&quot;line&quot;:132,&quot;column&quot;:66,&quot;offset&quot;:2113}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:138,&quot;column&quot;:17,&quot;offset&quot;:2166},&quot;end&quot;:{&quot;line&quot;:138,&quot;column&quot;:35,&quot;offset&quot;:2185}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:12,&quot;offset&quot;:2216},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:15,&quot;offset&quot;:2220}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:12,&quot;offset&quot;:2216},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:26,&quot;offset&quot;:2231}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:12,&quot;offset&quot;:2216},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:71,&quot;offset&quot;:2276}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:33,&quot;offset&quot;:2237},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:62,&quot;offset&quot;:2267}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:65,&quot;offset&quot;:2269},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:70,&quot;offset&quot;:2275}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:146,&quot;column&quot;:12,&quot;offset&quot;:2349},&quot;end&quot;:{&quot;line&quot;:146,&quot;column&quot;:15,&quot;offset&quot;:2353}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:146,&quot;column&quot;:12,&quot;offset&quot;:2349},&quot;end&quot;:{&quot;line&quot;:146,&quot;column&quot;:26,&quot;offset&quot;:2364}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:146,&quot;column&quot;:12,&quot;offset&quot;:2349},&quot;end&quot;:{&quot;line&quot;:146,&quot;column&quot;:68,&quot;offset&quot;:2406}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:146,&quot;column&quot;:33,&quot;offset&quot;:2370},&quot;end&quot;:{&quot;line&quot;:146,&quot;column&quot;:67,&quot;offset&quot;:2405}}],&quot;uncovered_count&quot;:13,&quot;uncovered_locs&quot;:[{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:92,&quot;column&quot;:15,&quot;offset&quot;:1394},&quot;end&quot;:{&quot;line&quot;:96,&quot;column&quot;:7,&quot;offset&quot;:1455}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:103,&quot;column&quot;:12,&quot;offset&quot;:1496},&quot;end&quot;:{&quot;line&quot;:103,&quot;column&quot;:17,&quot;offset&quot;:1502}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:104,&quot;column&quot;:52,&quot;offset&quot;:1577},&quot;end&quot;:{&quot;line&quot;:104,&quot;column&quot;:53,&quot;offset&quot;:1579}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:117,&quot;column&quot;:10,&quot;offset&quot;:1748},&quot;end&quot;:{&quot;line&quot;:117,&quot;column&quot;:15,&quot;offset&quot;:1754}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:53,&quot;offset&quot;:1849},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:54,&quot;offset&quot;:1851}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:124,&quot;column&quot;:11,&quot;offset&quot;:1895},&quot;end&quot;:{&quot;line&quot;:124,&quot;column&quot;:16,&quot;offset&quot;:1901}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:53,&quot;offset&quot;:1973},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:54,&quot;offset&quot;:1975}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:131,&quot;column&quot;:13,&quot;offset&quot;:2021},&quot;end&quot;:{&quot;line&quot;:131,&quot;column&quot;:18,&quot;offset&quot;:2027}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:132,&quot;column&quot;:53,&quot;offset&quot;:2099},&quot;end&quot;:{&quot;line&quot;:132,&quot;column&quot;:54,&quot;offset&quot;:2101}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:138,&quot;column&quot;:9,&quot;offset&quot;:2158},&quot;end&quot;:{&quot;line&quot;:138,&quot;column&quot;:14,&quot;offset&quot;:2164}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:53,&quot;offset&quot;:2257},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:54,&quot;offset&quot;:2259}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:145,&quot;column&quot;:14,&quot;offset&quot;:2312},&quot;end&quot;:{&quot;line&quot;:145,&quot;column&quot;:19,&quot;offset&quot;:2318}},{&quot;source&quot;:&quot;/Users/yoshi/Workspace/nsn/projects/coresys/apps/nsn.platform.js/src/apparel/design/index.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:146,&quot;column&quot;:53,&quot;offset&quot;:2390},&quot;end&quot;:{&quot;line&quot;:146,&quot;column&quot;:54,&quot;offset&quot;:2392}}],&quot;empty_count&quot;:0,&quot;empty_locs&quot;:[]},&quot;filename&quot;:&quot;src/apparel/design/index.js&quot;,&quot;annotation&quot;:&quot;flow strict&quot;,&quot;isFlow&quot;:true,&quot;percent&quot;:81}</pre></body></html>
