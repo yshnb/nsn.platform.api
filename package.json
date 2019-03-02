@@ -5,6 +5,10 @@
   "repository": "git@github.com:o3co/nsn.platform.api.git",
   "author": "Yoshi Aoki <yoshi@1o1.co.jp>",
   "license": "MIT",
+  "engines": {
+    "node": ">=8.15.0",
+    "npm": ">=6.4.0"
+  },
   "scripts": {
     "prepare": "npm-run-all prepare:*",
     "prepare:flow-typed": "flow-typed install",
@@ -37,7 +41,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-plugin-flowtype": "^3.2.0",
-    "flow-bin": "^0.89.0",
+    "flow-bin": "^0.94.0",
     "flow-copy-source": "^2.0.2",
     "flow-coverage-report": "^0.6.1",
     "flow-typed": "^2.5.1",

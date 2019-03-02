@@ -41,7 +41,7 @@ export class AuthenticationError extends Error {
 
   name: string
 
-  request: ?(http$ClientRequest | XMLHttpRequest)
+  request: ?(http$ClientRequest<> | XMLHttpRequest)
 
   constructor(error: AxiosError<any>) {
     super(`Authentication Fault: ${ error.code ? error.code : ''} : ${ error.message } : ${ (error.request:any)._header }`)
