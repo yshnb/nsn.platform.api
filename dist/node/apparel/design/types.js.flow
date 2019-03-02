@@ -1,12 +1,15 @@
+/* @flow strict */
 
-import {
-  type SizeKey,
-  type SizeFamilyKey,
-} from '../core/types'
+import type {
+  Instant,
+  UUID,
+  SizeKey,
+  SizeFamilyKey,
+} from '../core'
 
 /**
  */
-export type ID = string
+export type Id = UUID 
 
 export type Key = string
 
@@ -19,9 +22,9 @@ export type {
  */
 export type Name = string
 
-export type DesignerID = string
+export type DesignerId = string
 
-export type ProviderID = string
+export type ProviderId = string
 
 export type BrandKey = string
 
@@ -52,13 +55,13 @@ export type EntryState = "active" | "deleted"
 /**
  */
 export type Design = {
-  id:   ID,
+  id:   Id,
   name: Name,
 }
 
 /**
  */
-export type BaseSnapshot = Design
+export type BaseSnapshot = Design & {}
 
 /**
  */
@@ -72,7 +75,7 @@ export type Snapshot = BaseSnapshot & {
   genderTarget: string,
   cost: number, // 100.0,
   price: number, // 200.0,
-  sizeFamily: SizeFamily, // sml,
+  sizeFamily: SizeFamilyKey, // sml,
   patterns: Array<ColorPattern>,
   measurements: Array<Measurement>,
   attachments: Array<Attachment>,
@@ -98,10 +101,10 @@ export type EntryIndex = BaseEntry & {}
 /**
  */
 export type Entry = BaseEntry & {
-  id: ID,
+  id: Id,
   brand: BrandKey,
-  designer?: DesignerID,
-  provider?: ProviderID,
+  designer?: DesignerId,
+  provider?: ProviderId,
   name?: Name,
   cost?: Cost,
   price?: Price,
@@ -123,6 +126,8 @@ export type ColorPattern = {
   pattern:      string,
   materials:    Array<MaterialRatio>
 }
+
+export type MaterialName = string
 
 export type MaterialRatio = {
   key:   MaterialName,
