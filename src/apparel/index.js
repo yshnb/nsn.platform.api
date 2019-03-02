@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import * as designer from './designer'
 import * as design from './design'
