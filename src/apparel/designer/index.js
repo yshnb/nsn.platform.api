@@ -1,9 +1,9 @@
-/* @flow */
+/* @flow strict */
 
 /**
- * Designer ID
+ * Designer Id
  */
-export type ID = string
+export type Id = string
 
 /**
  * Designer Name
@@ -11,7 +11,7 @@ export type ID = string
 export type Name = string
 
 type BaseEntry = {
-  id:    ID,
+  id:    Id,
   name:  Name,
 }
 

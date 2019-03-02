@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import {
   type Key as CategoryKey,
@@ -13,3 +13,4 @@ export type SizeKey = CategoryKey
  *
  */
 export type SizeFamilyKey = CategoryKey
+

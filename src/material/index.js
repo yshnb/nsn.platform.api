@@ -1,8 +1,8 @@
-/* @flow */
+/* @flow strict */
 import {
   BaseClient,
   type Response,
-  type ListView,
+  type PageResult,
 } from '../core'
 
 /**
@@ -34,7 +34,7 @@ export class Client extends BaseClient {
   
   /**
    */
-  list(size: number = 10, offset: number = 0): Response<ListView<Entry>> {
+  list(size: number = 10, offset: number = 0): Response<PageResult<Entry>> {
     return this.httpClient.get('/materials', {
       params: {
         size,
