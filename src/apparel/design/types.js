@@ -110,13 +110,13 @@ export type Entry = BaseEntry & {
   price?: Price,
   genderTarget?: GenderTarget,
   category?: CategoryKey,
-  patterns?: Array<ColorPattern>,
+  patterns: Array<ColorPattern>,
   sizeFamily?: SizeFamilyKey,
-  sizes?: Array<SizeKey>,
+  sizes: Array<SizeKey>,
   comment?: Comment,
-  measurements?: Array<Measurement>,
-  attachments?: Array<Attachment>,
-  images?: Array<Image>,
+  measurements: Array<Measurement>,
+  attachments: Array<Attachment>,
+  images: Array<Image>,
 }
 
 export type ColorPattern = {
@@ -129,9 +129,11 @@ export type ColorPattern = {
 
 export type MaterialName = string
 
+export type Ratio = number
+
 export type MaterialRatio = {
   key:   MaterialName,
-  ratio: MaterialRatio,
+  ratio: Ratio,
 }
 
 /**
