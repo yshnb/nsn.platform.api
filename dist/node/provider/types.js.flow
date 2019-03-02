@@ -20,6 +20,8 @@ export type ProviderType = "external" | "internal"
  */
 export type UniqueName = string
 
+export type Label = string
+
 /**
  *
  */
@@ -33,6 +35,7 @@ type Base = {
 type BaseEntry = Base & {
   id: Id,
   uniqueName: UniqueName,
+  label: Label,
   providerType: ProviderType,
   createdAt: Instant,
   updatedAt: Instant,

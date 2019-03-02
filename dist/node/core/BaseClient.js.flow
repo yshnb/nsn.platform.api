@@ -1,15 +1,13 @@
 /* @flow strict */
 
-import axios from 'axios'
+import axios, {
+  Axios,
+  type $AxiosXHRConfigBase as AxiosXHRConfigBase,
+} from 'axios'
 
 import {
   AuthenticationError,
 } from './errors'
-
-import {
-  Axios,
-  type $AxiosXHRConfigBase as AxiosXHRConfigBase,
-} from 'axios'
 
 /**
  */

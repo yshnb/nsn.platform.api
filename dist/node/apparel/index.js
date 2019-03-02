@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.texture = exports.pattern = exports.design = exports.designer = void 0;
+exports.texture = exports.pattern = exports.design = exports.designer = exports.core = void 0;
+
+var core = _interopRequireWildcard(require("./core"));
+
+exports.core = core;
 
 var designer = _interopRequireWildcard(require("./designer"));
 
