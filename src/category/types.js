@@ -26,7 +26,7 @@ type BaseEntry = Category;
  */
 export type Entry = BaseEntry & {
   parentPath?:  Key,
-  subCategories: {[Key]: Category},
+  subCategories: {[Key]: Label},
 }
 
 /**

@@ -25,6 +25,10 @@ export type Color = {
   rgb:   RGB
 }
 
+type BaseEntry = Color
+
+export type Entry = BaseEntry & {}
+
 /**
  *
  */
