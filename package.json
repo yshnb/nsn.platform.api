@@ -28,6 +28,7 @@
     "coverage": "npm-run-all coverage:*",
     "coverage:flow": "flow-coverage-report --config .flow-coverage-reportrc.js",
     "preversion": "npm-run-all build coverage",
+    "test": "echo ok",
     "watch": "npm-run-all --parallel watch:*",
     "watch:babel": "babel src --out-dir dist/node --watch --verbose",
     "watch:flow": "watch '$npm_execpath run lint:flow' ./src"
@@ -48,6 +49,7 @@
     "flow-coverage-report": "^0.6.1",
     "flow-typed": "^2.5.1",
     "flow-watch": "^1.1.4",
+    "wait-on": "^3.2.0",
     "watch": "^1.0.2"
   },
   "dependencies": {
