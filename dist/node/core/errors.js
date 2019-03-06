@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AuthenticationError = void 0;
 
+/*  strict */
+
 /**
  */
 class AuthenticationError extends Error {

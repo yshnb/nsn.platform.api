@@ -16,6 +16,30 @@ Object.keys(_types).forEach(function (key) {
   });
 });
 
+var _consts = require("./consts");
+
+Object.keys(_consts).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _consts[key];
+    }
+  });
+});
+
+var _helper = require("./helper");
+
+Object.keys(_helper).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _helper[key];
+    }
+  });
+});
+
 var _Client = require("./Client");
 
 Object.keys(_Client).forEach(function (key) {

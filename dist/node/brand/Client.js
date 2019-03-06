@@ -7,6 +7,8 @@ exports.Client = void 0;
 
 var _core = require("../core");
 
+/*  strict */
+
 /**
  *
  * @class
