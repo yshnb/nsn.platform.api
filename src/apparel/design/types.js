@@ -47,7 +47,14 @@ export type Quantity = number
 
 /**
  */
-export type EntryState = "active" | "deleted"
+export type EntryState = "active" | "deleted" | "archived"
+
+/**
+ * comma separated list of EntryState
+ *
+ * ex) "active,deleted"
+ */
+export type EntryStateList = string
 
 
 // -------------------------------------------------

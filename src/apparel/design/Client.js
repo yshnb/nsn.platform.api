@@ -17,6 +17,7 @@ import type {
   Cost,
   DesignerId,
   EntryState,
+  EntryStateList,
   GenderTarget,
   Id,
   Image,
@@ -33,11 +34,12 @@ import type {
 } from './types'
 
 /**
+ * EntryState
  */
 export type ListOption = {
   condition?: {
     key?: Key,
-    state?: EntryState,
+    state?: EntryStateList,
     designer?: DesignerId,
   }
 }
