@@ -14,11 +14,16 @@ var _core = require("../core");
  * @class
  */
 class Client extends _core.BaseClient {
+  get basepath() {
+    return '/brands';
+  }
   /**
    * List brand entries
    */
+
+
   list(size = 10, offset = 0) {
-    return this.httpClient.get('/brands', {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset
@@ -30,8 +35,29 @@ class Client extends _core.BaseClient {
    */
 
 
-  describe(key) {
-    return this.httpClient.get(`/brands/${key}`);
+  describeEntry(key) {
+    return this.httpClient.get(this.relativePath(key));
+  }
+  /**
+   */
+
+
+  createEntry(param) {
+    return this.httpClient.get(this.relativePath());
+  }
+  /**
+   */
+
+
+  updateEntry(key, params) {
+    return this.httpClient.get(this.relativePath(key));
+  }
+  /**
+   */
+
+
+  deleteEntry(key) {
+    return this.httpClient.delete(this.relativePath(key));
   }
   /**
    * List designers of the brand
@@ -39,7 +65,7 @@ class Client extends _core.BaseClient {
 
 
   listDesigners(key) {
-    return this.httpClient.get(`brands/${key}/teams/designer/members`);
+    return this.httpClient.get(this.relativePath(key, '/teams/designer/members'));
   }
 
 }

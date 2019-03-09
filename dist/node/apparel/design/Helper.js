@@ -20,7 +20,7 @@ class Helper {
       case 'active':
       case 'deleted':
       case 'archived':
-        return _consts.EntryStateLabels[state];
+        return _consts.EntryStates[state];
 
       default:
         throw new Error(`Unknown state ${state}`);

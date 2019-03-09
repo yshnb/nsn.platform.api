@@ -9,6 +9,10 @@ var _axios = _interopRequireWildcard(require("axios"));
 
 var _errors = require("./errors");
 
+var _path = _interopRequireDefault(require("path"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 /*  strict */
@@ -18,6 +22,23 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 class BaseClient {
   /**
    */
+
+  /**
+   */
+  get basepath() {
+    return '';
+  }
+  /**
+   */
+
+
+  relativePath(...args) {
+    return _path.default.join.apply(null, Array.prototype.slice.apply(args).unshift(this.basepath));
+  }
+  /**
+   */
+
+
   constructor(params = {}) {
     if (params.httpClient && params.httpClient instanceof _axios.Axios) {
       this.httpClient = params.httpClient;

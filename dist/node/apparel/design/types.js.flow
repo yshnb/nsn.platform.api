@@ -103,7 +103,7 @@ export type BaseEntry = Design
 
 /**
  */
-export type EntryIndex = BaseEntry & {}
+export type IndexedEntry = BaseEntry & {}
 
 /**
  */

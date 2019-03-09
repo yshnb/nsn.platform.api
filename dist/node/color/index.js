@@ -3,22 +3,27 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Client = void 0;
 
-var _core = require("../core");
+var _types = require("./types");
 
-/*  strict */
+Object.keys(_types).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _types[key];
+    }
+  });
+});
 
-/**
- *
- */
-class Client extends _core.BaseClient {
-  /**
-   */
-  list() {
-    return this.httpClient.get('/colors');
-  }
+var _Client = require("./Client");
 
-}
-
-exports.Client = Client;
+Object.keys(_Client).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _Client[key];
+    }
+  });
+});

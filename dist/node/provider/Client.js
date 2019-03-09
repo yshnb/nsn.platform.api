@@ -13,10 +13,15 @@ var _core = require("../core");
  *
  */
 class Client extends _core.BaseClient {
+  get basepath() {
+    return '/product/providers';
+  }
   /**
    */
+
+
   list(size = 10, offset = 0) {
-    return this.httpClient.get('/product/providers', {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset
@@ -25,7 +30,7 @@ class Client extends _core.BaseClient {
   }
 
   describe(id) {
-    return this.httpClient.get(`/product/providers/${id}`);
+    return this.httpClient.get(this.relativePath(id));
   }
 
 }

@@ -48,6 +48,6 @@ export type Entry = BaseEntry & {
 
 /**
  */
-export type EntryIndex = BaseEntry & {
+export type IndexedEntry = BaseEntry & {
 }
 

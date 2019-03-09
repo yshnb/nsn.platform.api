@@ -15,10 +15,17 @@ var _core = require("../core");
  */
 class Client extends _core.BaseClient {
   /**
+   */
+  get basepath() {
+    return '/orders';
+  }
+  /**
    * List entries
    */
+
+
   list(size = 10, offset = 0) {
-    return this.httpClient.get('/orders', {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset
@@ -31,28 +38,28 @@ class Client extends _core.BaseClient {
 
 
   describe(id) {
-    return this.httpClient.get(`/orders/${id}`);
+    return this.httpClient.get(this.relativePath(id));
   }
   /**
    */
 
 
   register(params) {
-    return this.httpClient.post('/orders', params);
+    return this.httpClient.post(this.relativePath(), params);
   }
   /**
    */
 
 
   approve(id, params = {}) {
-    return this.httpClient.post(`/orders/${id}/approve`, params);
+    return this.httpClient.post(this.relativePath(id, 'approve'), params);
   }
   /**
    */
 
 
   reject(id, params = {}) {
-    return this.httpClient.post(`/orders/${id}/reject`, params);
+    return this.httpClient.post(this.relativePath(id, 'reject'), params);
   }
 
 }

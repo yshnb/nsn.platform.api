@@ -15,8 +15,29 @@ var _core = require("../core");
 class Client extends _core.BaseClient {
   /**
    */
-  describe(key) {
-    return this.httpClient.get(`/categories/${key}`);
+  get basepath() {
+    return '/categories';
+  }
+  /**
+   */
+
+
+  describeNode(key) {
+    return this.httpClient.get(this.relativePath(key));
+  }
+  /**
+   */
+
+
+  putNode(key, params) {
+    return this.httpClient.put(this.relativePath(key), params);
+  }
+  /**
+   */
+
+
+  deleteNode(key) {
+    return this.httpClient.delete(this.relativePath(key));
   }
 
 }

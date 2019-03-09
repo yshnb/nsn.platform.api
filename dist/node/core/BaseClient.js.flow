@@ -9,6 +9,8 @@ import {
   AuthenticationError,
 } from './errors'
 
+import path from 'path'
+
 /**
  */
 export type ConstructParams = {
@@ -23,6 +25,23 @@ export class BaseClient {
    */
   httpClient: Axios
 
+  /**
+   */
+  get basepath(): string {
+    return ''
+  }
+
+  /**
+   */
+  relativePath(...args: Array<string>): string {
+    return path.join.apply(
+      null, 
+      Array.prototype.slice.apply(args).unshift(this.basepath),
+    )
+  }
+
+  /**
+   */
   constructor(params: ConstructParams = {}) {
     if(params.httpClient && (params.httpClient instanceof Axios)) {
       this.httpClient = params.httpClient
