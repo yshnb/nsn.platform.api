@@ -29,7 +29,7 @@ import type {
   Quantity,
   // Models
   Entry,
-  EntryIndex,
+  IndexedEntry,
   Snapshot,
 } from './types'
 
@@ -88,7 +88,7 @@ export class Client extends BaseClient {
   /**
    *
    */
-  list(size: number = 10, offset: number = 0, opt: ListOption = {}): Response<PageResult<EntryIndex>> {
+  list(size: number = 10, offset: number = 0, opt: ListOption = {}): Response<PageResult<IndexedEntry>> {
     const condition = {
       ...opt.condition,
     }

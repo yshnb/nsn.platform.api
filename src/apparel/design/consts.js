@@ -5,8 +5,9 @@ import type {
 } from './types'
 
 /**
+ * 
  */
-export const EntryStateLabels: {[EntryState]: string} = {
+export const EntryStates: {[EntryState]: string} = {
   active:   'アクティブ',
   deleted:  '削除済み',
   archived: 'アーカイブ済み',

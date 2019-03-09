@@ -4,7 +4,7 @@ import type {
 } from './types'
 
 import {
-  EntryStateLabels,
+  EntryStates,
 } from './consts'
 
 /**
@@ -13,12 +13,12 @@ import {
 class Helper {
   /**
    */
-  labelEntryState(state:EntryState): string {
+  labelEntryState(state: EntryState): string {
     switch(state) {
     case 'active':
     case 'deleted':
     case 'archived':
-      return EntryStateLabels[state]
+      return EntryStates[state]
     default:
       throw new Error(`Unknown state ${ state}`)
     }

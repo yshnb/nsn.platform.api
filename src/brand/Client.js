@@ -10,9 +10,17 @@ import type {
   Key,
   Member,
   //
-  EntryIndex,
+  IndexedEntry,
   Entry,
 } from './types'
+
+/**
+ */
+export type CreateParams = {}
+
+/**
+ */
+export type UpdateParams = {}
 
 /**
  *
@@ -20,11 +28,15 @@ import type {
  */
 export class Client extends BaseClient {
 
+  get basepath() {
+    return '/brands'
+  }
+
   /**
    * List brand entries
    */
-  list(size: number = 10, offset: number = 0): Response<PageResult<EntryIndex>> {
-    return this.httpClient.get('/brands', {
+  list(size: number = 10, offset: number = 0): Response<PageResult<IndexedEntry>> {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset,
@@ -35,8 +47,26 @@ export class Client extends BaseClient {
   /**
    * Describe the brand entry
    */
-  describe(key: Key): Response<Entry> {
-    return this.httpClient.get(`/brands/${key}`)
+  describeEntry(key: Key): Response<Entry> {
+    return this.httpClient.get(this.relativePath(key))
+  }
+
+  /**
+   */
+  createEntry(param: CreateParams): Response<Entry> {
+    return this.httpClient.get(this.relativePath())
+  }
+
+  /**
+   */
+  updateEntry(key: Key, params: UpdateParams): Response<void> {
+    return this.httpClient.get(this.relativePath(key))
+  }
+
+  /**
+   */
+  deleteEntry(key: Key): Response<void> {
+    return this.httpClient.delete(this.relativePath(key))
   }
 
   /**

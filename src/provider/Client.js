@@ -8,7 +8,7 @@ import {
 import type {
   Id,
   Entry,
-  EntryIndex,
+  IndexedEntry,
 } from './types'
 
 /**
@@ -17,7 +17,7 @@ import type {
 export class Client extends BaseClient {
   /**
    */
-  list(size: number = 10, offset: number = 0): Response<PageResult<EntryIndex>> {
+  list(size: number = 10, offset: number = 0): Response<PageResult<IndexedEntry>> {
     return this.httpClient.get('/product/providers', {
       params: {
         size,
