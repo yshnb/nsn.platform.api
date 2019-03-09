@@ -34,10 +34,11 @@ export class BaseClient {
   /**
    */
   relativePath(...args: Array<string>): string {
-    return path.join.apply(
-      null, 
-      Array.prototype.slice.apply(args).unshift(this.basepath),
-    )
+    const paths = Array.prototype.slice.apply(args)
+    if(this.basepath) {
+      paths.unshift(this.basepath)
+    }
+    return path.join.apply(null, paths)
   }
 
   /**
