@@ -73,7 +73,7 @@ export class Client extends BaseClient {
    * List designers of the brand
    */
   listDesigners(key: Key): Response<PageResult<Member>> {
-    return this.httpClient.get(`brands/${key}/teams/designer/members`)
+    return this.httpClient.get(this.relativePath(key, '/teams/designer/members'))
   }
 }
 
