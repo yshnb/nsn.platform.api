@@ -19,7 +19,7 @@ export type Name = string
 
 /**
  */
-export type State = "active" | "deleted"
+export type EntryState = "active" | "deleted"
 
 /**
  *
@@ -37,14 +37,14 @@ export type BaseEntry = Base & {}
 export type Entry = BaseEntry & {
   name: Name,
   sysname: string,
-  state: string,
+  state: EntryState,
   registeredAt: string,
   lastModifiedAt: string,
 }
 
 /**
  */
-export type EntryIndex = BaseEntry & {}
+export type IndexedEntry = BaseEntry & {}
 
 /**
  */

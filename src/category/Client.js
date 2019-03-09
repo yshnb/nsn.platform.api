@@ -12,12 +12,34 @@ import type {
 } from './types'
 
 /**
+ */
+export type PutParams = {}
+
+/**
  *
  */
 export class Client extends BaseClient {
   /**
    */
-  describe(key: Key): Response<Node> {
-    return this.httpClient.get(`/categories/${key}`)
+  get basepath() {
+    return '/categories'
+  }
+
+  /**
+   */
+  describeNode(key: Key): Response<Node> {
+    return this.httpClient.get(this.relativePath(key))
+  }
+
+  /**
+   */
+  putNode(key: Key, params: PutParams): Response<Node> {
+    return this.httpClient.put(this.relativePath(key), params)
+  }
+
+  /**
+   */
+  deleteNode(key: Key): Response<void> {
+    return this.httpClient.delete(this.relativePath(key))
   }
 }

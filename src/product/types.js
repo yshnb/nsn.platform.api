@@ -22,7 +22,7 @@ export type BaseEntry = Base & {}
 
 /**
  */
-export type EntryIndex = BaseEntry & {}
+export type IndexedEntry = BaseEntry & {}
 
 /**
  */

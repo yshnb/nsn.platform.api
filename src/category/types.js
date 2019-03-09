@@ -1,8 +1,5 @@
 /* @flow strict */
 
-import {
-} from '../core'
-
 /**
  */
 export type Key = string
@@ -20,19 +17,12 @@ export type Category = {
 
 /**
  */
-type BaseEntry = Category;
+type BaseNode = Category;
 
 /**
  */
-export type Entry = BaseEntry & {
+export type Node = BaseNode & {
   parentPath?:  Key,
   subCategories: {[Key]: Label},
 }
-
-/**
- */
-export type Node = Category & {
-  children?: Array<Category>
-}
-
 

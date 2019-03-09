@@ -9,15 +9,21 @@ import {
 import type {
   Id,
   //
-  EntryIndex,
+  IndexedEntry,
   Entry,
 } from './types'
 
+/**
+ */
 export type RegisterParams = {
 }
 
+/**
+ */
 export type ApproveParams = {}
 
+/**
+ */
 export type RejectParams = {}
 
 /**
@@ -28,7 +34,7 @@ export class Client extends BaseClient {
   /**
    * List entries
    */
-  list(size: number = 10, offset: number = 0): Response<PageResult<EntryIndex>> {
+  list(size: number = 10, offset: number = 0): Response<PageResult<IndexedEntry>> {
     return this.httpClient.get('/orders', {
       params: {
         size,
