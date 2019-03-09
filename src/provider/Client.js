@@ -15,10 +15,14 @@ import type {
  *
  */
 export class Client extends BaseClient {
+  get basepath() {
+    return '/product/providers'
+  }
+
   /**
    */
   list(size: number = 10, offset: number = 0): Response<PageResult<IndexedEntry>> {
-    return this.httpClient.get('/product/providers', {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset,
@@ -27,7 +31,7 @@ export class Client extends BaseClient {
   }
 
   describe(id: Id): Response<Entry> {
-    return this.httpClient.get(`/product/providers/${ id }`)
+    return this.httpClient.get(this.relativePath(id))
   }
 }
 

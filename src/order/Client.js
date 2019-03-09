@@ -32,10 +32,16 @@ export type RejectParams = {}
  */
 export class Client extends BaseClient {
   /**
+   */
+  get basepath(): string {
+    return '/orders'
+  }
+
+  /**
    * List entries
    */
   list(size: number = 10, offset: number = 0): Response<PageResult<IndexedEntry>> {
-    return this.httpClient.get('/orders', {
+    return this.httpClient.get(this.relativePath(), {
       params: {
         size,
         offset,
@@ -47,25 +53,25 @@ export class Client extends BaseClient {
    * Describe entry
    */
   describe(id: Id): Response<Entry> {
-    return this.httpClient.get(`/orders/${ id }`)
+    return this.httpClient.get(this.relativePath(id))
   }
 
   /**
    */
   register(params: RegisterParams): Response<Entry> {
-    return this.httpClient.post('/orders', params)
+    return this.httpClient.post(this.relativePath(), params)
   }
 
   /**
    */
   approve(id: Id, params: ApproveParams = {}): Response<Entry> {
-    return this.httpClient.post(`/orders/${ id }/approve`, params)
+    return this.httpClient.post(this.relativePath(id, 'approve'), params)
   }
 
   /**
    */
   reject(id: Id, params: RejectParams = {}): Response<Entry> {
-    return this.httpClient.post(`/orders/${ id }/reject`, params)
+    return this.httpClient.post(this.relativePath(id, 'reject'), params)
   }
 }
 
