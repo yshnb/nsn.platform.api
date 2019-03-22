@@ -16,14 +16,14 @@ Object.keys(_types).forEach(function (key) {
   });
 });
 
-var _Consts = require("./Consts");
+var _consts = require("./consts");
 
-Object.keys(_Consts).forEach(function (key) {
+Object.keys(_consts).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
-      return _Consts[key];
+      return _consts[key];
     }
   });
 });
