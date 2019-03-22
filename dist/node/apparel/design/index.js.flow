@@ -1,6 +1,6 @@
 /* @flow strict */
 
 export * from './types'
-export * from './consts'
-export * from './helper'
+export * from './Consts'
+export * from './Helper'
 export * from './Client'

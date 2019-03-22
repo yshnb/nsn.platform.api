@@ -16,26 +16,26 @@ Object.keys(_types).forEach(function (key) {
   });
 });
 
-var _consts = require("./consts");
+var _Consts = require("./Consts");
 
-Object.keys(_consts).forEach(function (key) {
+Object.keys(_Consts).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
-      return _consts[key];
+      return _Consts[key];
     }
   });
 });
 
-var _helper = require("./helper");
+var _Helper = require("./Helper");
 
-Object.keys(_helper).forEach(function (key) {
+Object.keys(_Helper).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
-      return _helper[key];
+      return _Helper[key];
     }
   });
 });
