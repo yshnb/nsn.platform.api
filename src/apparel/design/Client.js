@@ -52,7 +52,7 @@ export type OrderParams = {
 
 export type RegisterParams = {
   brand: BrandKey,
-  designer?: DesignerId,
+  designer: DesignerId,
   provider?: ProviderId,
   name?: Name,
   cost?: Cost,
