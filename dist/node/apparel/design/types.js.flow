@@ -11,8 +11,12 @@ import type {
  */
 export type Id = UUID 
 
+/**
+ */
 export type Key = string
 
+/**
+ */
 export type {
   SizeKey,
   SizeFamilyKey,
@@ -22,27 +26,47 @@ export type {
  */
 export type Name = string
 
+/**
+ */
 export type DesignerId = string
 
+/**
+ */
 export type ProviderId = string
 
+/**
+ */
 export type BrandKey = string
 
+/**
+ */
 export type Cost = number
 
+/**
+ */
 export type Price = number
 
+/**
+ */
 export type GenderTarget = "male" | "female"
 
+/**
+ */
 export type CategoryKey = string
 
+/**
+ */
 export type Comment = string
 
+/**
+ */
 export type Measurement = {
   name: string,
   values: Object,
 }
 
+/**
+ */
 export type Quantity = number
 
 /**
@@ -56,76 +80,85 @@ export type EntryState = "active" | "deleted" | "archived"
  */
 export type EntryStateList = string
 
+export type VersionNumber = number
+
 
 // -------------------------------------------------
 // MODELS
 /**
  */
-export type Design = {
-  id:   Id,
-  name: Name,
+export type Persisted = {
+  id:         Id,
+  createdAt:  Instant,
+  updatedAt:  Instant,
 }
 
 /**
  */
-export type BaseSnapshot = Design & {}
+export type BaseSnapshot = Persisted & {
+  key:             Key,
+  brand:           BrandKey,
+  category:        CategoryKey,
+  cost:            Cost,
+  designer:        DesignerId,
+  genderTarget:    GenderTarget,
+  price:           Price,
+  provider:        ProviderId,
+  registeredAt:    Instant,
+  sizeFamily:      SizeFamilyKey,
+  snapshotAt:      Instant,
+  state:           EntryState,
+  version:         VersionNumber,
+}
 
 /**
  */
 export type Snapshot = BaseSnapshot & {
-  key: string,
-  version: number, // 2,
-  brand: string, // lazlena,
-  designer: number, // 529568bf-6566-43dc-b23b-33e8b77f491d,
-  state: string,
-  provider: string,
-  genderTarget: string,
-  cost: number, // 100.0,
-  price: number, // 200.0,
-  sizeFamily: SizeFamilyKey, // sml,
-  patterns: Array<ColorPattern>,
-  measurements: Array<Measurement>,
-  attachments: Array<Attachment>,
-  comment?: string,
-  images: Array<Image>,
-  category: CategoryKey,
-  registeredAt: string, // 2018-05-28T12:26:14Z,
-  snapshotAt: string, // 2018-05-28T12:26:14Z
+  comment?:        Comment,
+  // One-To-Many
+  attachments:     Array<Attachment>,
+  images:          Array<Image>,
+  measurements:    Array<Measurement>,
+  patterns:        Array<ColorPattern>,
 }
 
 /**
  */
-export type SnapshotIndex = BaseSnapshot & {}
+export type IndexedSnapshot = BaseSnapshot & {
 
-/**
- */
-export type BaseEntry = Design 
-
-/**
- */
-export type IndexedEntry = BaseEntry & {}
-
-/**
- */
-export type Entry = BaseEntry & {
-  id: Id,
-  brand: BrandKey,
-  designer?: DesignerId,
-  provider?: ProviderId,
-  name?: Name,
-  cost?: Cost,
-  price?: Price,
-  genderTarget?: GenderTarget,
-  category?: CategoryKey,
-  patterns: Array<ColorPattern>,
-  sizeFamily?: SizeFamilyKey,
-  sizes: Array<SizeKey>,
-  comment?: Comment,
-  measurements: Array<Measurement>,
-  attachments: Array<Attachment>,
-  images: Array<Image>,
 }
 
+/**
+ */
+export type FormFields = {
+  brand:           BrandKey,
+  category?:       CategoryKey,
+  comment?:        Comment,
+  cost?:           Cost,
+  designer?:       DesignerId,
+  genderTarget?:   GenderTarget,
+  name?:           Name,
+  price?:          Price,
+  provider?:       ProviderId,
+  sizeFamily?:     SizeFamilyKey,
+  // One-To-Many
+  attachments:     Array<Attachment>,
+  images:          Array<Image>,
+  measurements:    Array<Measurement>,
+  patterns:        Array<ColorPattern>,
+  sizes:           Array<SizeKey>,
+}
+
+/**
+ * @memberof apparel.design
+ * @property {boolean} isProductized - Is productized or not.
+ */
+export type Entry = Persisted & FormFields & {
+  isProductized:   boolean,
+}
+
+/**
+ */
 export type ColorPattern = {
   colorLabel:   string,
   colorFamilies: Array<string>,
@@ -134,10 +167,16 @@ export type ColorPattern = {
   materials:    Array<MaterialRatio>
 }
 
+/**
+ */
 export type MaterialName = string
 
+/**
+ */
 export type Ratio = number
 
+/**
+ */
 export type MaterialRatio = {
   key:   MaterialName,
   ratio: Ratio,
@@ -151,6 +190,8 @@ export type Attachment = {
   uploadedAt: string,
 }
 
+/**
+ */
 export type Image = {
   key: string,
   title: string,

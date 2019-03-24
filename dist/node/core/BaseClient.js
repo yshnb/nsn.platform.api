@@ -7,9 +7,9 @@ exports.BaseClient = void 0;
 
 var _axios = _interopRequireWildcard(require("axios"));
 
-var _errors = require("./errors");
-
 var _path = _interopRequireDefault(require("path"));
+
+var _errors = require("./errors");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
