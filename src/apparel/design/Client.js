@@ -29,8 +29,8 @@ import type {
   Quantity,
   // Models
   Entry,
-  IndexedEntry,
   Snapshot,
+  IndexedSnapshot,
 } from './types'
 
 /**
@@ -93,7 +93,7 @@ export class Client extends BaseClient {
   /**
    *
    */
-  list(size: number = 10, offset: number = 0, opt: ListOption = {}): Response<PageResult<IndexedEntry>> {
+  list(size: number = 10, offset: number = 0, opt: ListOption = {}): Response<PageResult<IndexedSnapshot>> {
     const condition = {
       ...opt.condition,
     }

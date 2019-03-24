@@ -5,11 +5,11 @@ import axios, {
   type $AxiosXHRConfigBase as AxiosXHRConfigBase,
 } from 'axios'
 
+import path from 'path'
+
 import {
   AuthenticationError,
 } from './errors'
-
-import path from 'path'
 
 /**
  */
