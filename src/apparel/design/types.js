@@ -150,6 +150,8 @@ export type FormFields = {
 }
 
 /**
+ * @memberof apparel.design
+ * @property {boolean} isProductized - Is productized or not.
  */
 export type Entry = Persisted & FormFields & {
   isProductized:   boolean,
