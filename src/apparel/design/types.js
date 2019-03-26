@@ -96,19 +96,21 @@ export type Persisted = {
 /**
  */
 export type BaseSnapshot = Persisted & {
-  key:             Key,
   brand:           BrandKey,
-  category:        CategoryKey,
-  cost:            Cost,
   designer:        DesignerId,
-  genderTarget:    GenderTarget,
-  price:           Price,
-  provider:        ProviderId,
-  registeredAt:    Instant,
-  sizeFamily:      SizeFamilyKey,
+  key:             Key,
   snapshotAt:      Instant,
   state:           EntryState,
   version:         VersionNumber,
+  registeredAt:    Instant,
+  //
+  category?:        CategoryKey,
+  cost?:            Cost,
+  genderTarget?:    GenderTarget,
+  name?:            Name,
+  price?:           Price,
+  provider?:        ProviderId,
+  sizeFamily?:      SizeFamilyKey,
 }
 
 /**
